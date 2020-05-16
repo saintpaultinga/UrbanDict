@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">UrbanDict</string>
+    <string name="error_msg">No result found, please try later!</string>
+    <string name="search_term">Current Term:</string>
+    <string name="definition">Definition:</string>
+    <string name="sample">Sample:</string>
+    <string name="search_hint">Search your term here</string>
+    <string name="no_result_found">No result found, Please try another term!</string>
+    <string name="thumbs_up">by thumbs up</string>
+    <string name="thumbs_down">by thumbs down</string>
+    <string name="default_sort">default sort</string>
+</resources>

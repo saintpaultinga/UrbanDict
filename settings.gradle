@@ -1,0 +1,3 @@
+rootProject.name='UrbanDict'
+include ':app'
+include ':core'
