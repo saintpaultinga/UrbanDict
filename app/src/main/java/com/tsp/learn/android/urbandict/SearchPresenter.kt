@@ -2,13 +2,16 @@ package com.tsp.learn.android.urbandict
 
 import android.annotation.SuppressLint
 import com.tsp.learn.android.core.mvp.RxBaseMvpPresenter
-import com.tsp.learn.android.core.utils.Constants
+import com.tsp.learn.android.core.utils.Constants.EMPTY_STRING
+import com.tsp.learn.android.core.utils.Constants.THUMBS_DOWN_SEARCH_SORT
+import com.tsp.learn.android.core.utils.Constants.THUMBS_UP_SEARCH_SORT
 import com.tsp.learn.android.urbandict.contract.SearchContract
 import com.tsp.learn.android.urbandict.model.SearchResult
 import com.tsp.learn.android.urbandict.repository.SearchRepository
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class SearchPresenter @Inject constructor(private val searchRepository: SearchRepository):
@@ -27,8 +30,8 @@ class SearchPresenter @Inject constructor(private val searchRepository: SearchRe
     }
 
     private fun displayError(error: Throwable) {
-        // TODO replace the logging with Timber library and also cover this method with a unit test
         ifViewAttached { view ->
+            Timber.e(error, "Error retrieving the term definition!!")
             view.showError()
         }
     }
@@ -36,9 +39,9 @@ class SearchPresenter @Inject constructor(private val searchRepository: SearchRe
     private fun sortResult(resultList: List<SearchResult>, sortedPref: String): List<SearchResult> {
         var list = listOf<SearchResult>()
         when (sortedPref) {
-            Constants.EMPTY_STRING -> list = resultList
-            Constants.THUMBS_UP_SEARCH_SORT ->  list = resultList.sortedByDescending { it.thumbsUp }
-            Constants.THUMBS_DOWN_SEARCH_SORT -> list = resultList.sortedBy { it.thumbsDown }
+            EMPTY_STRING -> list = resultList
+            THUMBS_UP_SEARCH_SORT ->  list = resultList.sortedByDescending { it.thumbsUp }
+            THUMBS_DOWN_SEARCH_SORT -> list = resultList.sortedBy { it.thumbsDown }
         }
         return list
     }

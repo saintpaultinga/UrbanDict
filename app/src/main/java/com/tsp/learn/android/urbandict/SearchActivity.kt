@@ -19,6 +19,7 @@ import com.tsp.learn.android.urbandict.contract.SearchContract
 import com.tsp.learn.android.urbandict.model.SearchResult
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.sort_bar_layout.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class SearchActivity : MvpViewStateActivity<SearchContract.View, SearchContract.Presenter, SearchViewState>(),
@@ -62,6 +63,8 @@ class SearchActivity : MvpViewStateActivity<SearchContract.View, SearchContract.
         if (searchViewState.state == SearchViewState.STATE_DO_NOTHING) {
             showLoading()
             searchPresenter.searchTerm(currentSearchTerm)
+        } else {
+            Timber.d("Skip making a new call, the cached data will be used!!")
         }
     }
 
